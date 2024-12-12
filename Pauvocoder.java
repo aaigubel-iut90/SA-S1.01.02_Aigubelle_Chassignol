@@ -58,25 +58,31 @@ public class Pauvocoder {
      * @param freqScale
      * @return resampled wav
      */
-    public static double[] resample(double[] inputWav, double freqScale) {
-        if (freqScale == 1){
-            return inputWav;
+    public static double[] resample(double[] input, double freqScale) {
+        if (input == null || input.length == 0 || freqScale <= 0) {
+            throw new IllegalArgumentException("Le tableau d'entrée ne peut pas être nul ou vide et freqScale doit être positif.");
         }
-        double[] sampleWav = new double[(int)(inputWav.length/freqScale)];
-        int indice = 0;
-        if (freqScale <1){
-            for (int i=0;i<inputWav.length;i+=(1-freqScale)/freqScale){
-                sampleWav[indice] = inputWav[i];
-                indice+=1;
+        
+        // Calcule la taille du tableau de sortie pour toujours atteindre la fin du tableau d'entrée
+        int outputLength = (int) (input.length / freqScale);
+        double[] output = new double[outputLength];
+        
+        // Pour le sous-échantillonnage (freqScale < 1) et le sur-échantillonnage (freqScale > 1)
+        for (int i = 0; i < outputLength; i++) {
+            // Trouve la position dans le tableau d'entrée en utilisant le rapport inverse de freqScale
+            double position = i * (input.length - 1) / (double) (outputLength - 1);
+            
+            // Calcul de l'index correspondant
+            int index = (int) Math.round(position);
+            
+            if (index >= input.length - 1) {
+                output[i] = input[input.length - 1];
+            } else {
+                output[i] = input[index];
             }
         }
-        if (freqScale>1){
-            for (int i=0;i<inputWav.length;i+=(freqScale-1)/freqScale){
-                sampleWav[indice]=inputWav[i];
-                indice +=1;
-            }
-        }
-        return sampleWav;
+        
+        return output;
     }
 
     /**
