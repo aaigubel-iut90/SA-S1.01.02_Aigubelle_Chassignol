@@ -7,18 +7,18 @@ public class MainWithProfiler {
 
         // Profiling de l'approche naïve
         double[] resultNaive = Profiler.profileExecution("Naive Cross-Correlation", () ->
-            Correlation.naiveCrossCorrelation(signal1, signal2)
+            CrossCorrelation1.crosscorrelation(signal1, signal2)
         );
 
         // Profiling de l'approche FFT
         double[] resultFFT = Profiler.profileExecution("FFT Cross-Correlation", () ->
-            Correlation.fftCrossCorrelation(signal1, signal2)
+            CrossCorrelation2.crosscorrelation(signal1, signal2,false)
         );
 
         // Profiling de l'implémentation joue
         Profiler.profileExecution("Playing Signal", () ->
             {
-                joue(signal1);
+                Pauvocoder.joue(signal1);
                 return null;
             }
         );
@@ -33,5 +33,5 @@ public class MainWithProfiler {
         }
         return signal;
     }
-
+}
    
