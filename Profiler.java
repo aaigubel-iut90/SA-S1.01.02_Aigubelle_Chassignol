@@ -23,7 +23,7 @@ public class Profiler {
         long afterUsedMemory = afterMemory.getUsed();
 
         // Résultats
-        System.out.println("Execution time: " + (endTime - startTime) / 1e6 + " ms");
+        System.out.println("Execution time: " + (endTime - startTime) / 1e9 + " s");
         System.out.println("Memory used: " + (afterUsedMemory - beforeUsedMemory) / 1024 + " KB");
 
         return result;

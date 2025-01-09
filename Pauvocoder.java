@@ -14,16 +14,6 @@ public class Pauvocoder {
             // Jouer l'échantillon actuel
             StdAudio.play(input[i]);
 
-            // Affichage en temps réel des échantillons dans la fenêtre glissante
-            if (i % windowSize == 0) {
-                // Affichage des 100 derniers échantillons
-                System.out.println("Échantillons de " + i + " à " + Math.min(i + windowSize, input.length) + ":");
-                for (int j = i; j < Math.min(i + windowSize, input.length); j++) {
-                    System.out.print(String.format("%.4f ", input[j]));
-                }
-                System.out.println("\n---");
-            }
-
             // Attendre un petit délai avant de lire le prochain échantillon (en fonction du taux d'échantillonnage)
             try {
                 Thread.sleep(1000 / sampleRate);  // Attente correspondant à un échantillon (en ms)

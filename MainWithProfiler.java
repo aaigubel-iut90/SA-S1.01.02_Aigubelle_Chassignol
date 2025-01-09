@@ -23,13 +23,13 @@ public class MainWithProfiler {
 
         // Profiling de l'approche naïve de la corrélation croisée
         double[] resultNaive = Profiler.profileExecution("Naive Cross-Correlation", () -> {
-            // CrossCorrelation1 doit renvoyer un tableau double[], pas un double[][]
+            // CrossCorrelation1 doit renvoyer un tableau double[]
             return CrossCorrelation1.crosscorrelation(signal, signal); 
         });
 
         // Profiling de l'approche FFT de la corrélation croisée
         double[] resultFFT = Profiler.profileExecution("FFT Cross-Correlation", () -> {
-            // CrossCorrelation2 doit renvoyer un tableau double[], pas un double[][]
+            // CrossCorrelation2 doit renvoyer un tableau double[]
             return CrossCorrelation2.crosscorrelation(signal, signal, false); 
         });
 
