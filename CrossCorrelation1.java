@@ -1,17 +1,22 @@
 public class CrossCorrelation1 {
 
-    // Implémentation de l'approche naïve
     public static double[] crosscorrelation(double[] signal1, double[] signal2) {
-        int n = signal1.length;
-        double[] result = new double[n];
-
-        for (int tau = 0; tau < n; tau++) {
-            double sum = 0.0;
-            for (int i = 0; i < n - tau; i++) {
-                sum += signal1[i] * signal2[i + tau];
-            }
-            result[tau] = sum;
+        if (signal1 == null || signal2 == null) {
+            throw new IllegalArgumentException("Signals cannot be null");
         }
-        return result;
+
+        int length = Math.min(signal1.length, signal2.length);
+        double[] result = new double[length];
+
+        // Simple cross-correlation
+        for (int i = 0; i < length; i++) {
+            double sum = 0;
+            for (int j = 0; j < length - i; j++) {
+                sum += signal1[j] * signal2[j + i];
+            }
+            result[i] = sum;
+        }
+
+        return result;  // Renvoie un tableau double[]
     }
 }
