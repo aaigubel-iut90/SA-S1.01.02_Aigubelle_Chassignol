@@ -1,4 +1,4 @@
-public class MainWithProfiler {
+public class main {
 
     public static void main(String[] args) {
         if (args.length < 2) {
